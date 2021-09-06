@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: sample-voting-app
+  labels:
+    app: demo-voting-app
+spec:
+  # modify replicas according to your case
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-voting-app
+  template:
+    metadata:
+      labels:
+        app: demo-voting-app
+    spec:
+      containers:
+      - name: worker-app_pod
+        image: kodekloud/examplevotingapp_worker:v1
+        resources:
+          limits:
+            cpu: 200m
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
